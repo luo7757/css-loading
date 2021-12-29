@@ -1,81 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        h1{
+
+        h1 {
             color: #fff;
         }
-        h4{
-            color: rgba(255,168,170,.5);
+
+        h4 {
+            color: rgba(255, 168, 170, .5);
         }
-        html,body{
+
+        html,
+        body {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgb(240,108,110);
+            background-color: rgb(240, 108, 110);
         }
-        .textBox{
+
+        .textBox {
             margin-right: 50px;
         }
-        .monster{
-            background-color: rgb(253,115,84);
+
+        .monster {
+            background-color: rgb(253, 115, 84);
             width: 110px;
             height: 110px;
             margin: 10px;
             border-radius: 20px;
             display: flex;
             justify-content: center;
-            align-items:center;
+            align-items: center;
             flex-direction: column;
-            box-shadow: 0 10px 20px rgba(0,0,0,.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
             position: relative;
             animation: jumping .8s infinite alternate;
         }
-        .monster .eye{
+
+        .monster .eye {
             width: 40%;
             height: 40%;
             border-radius: 50%;
-            background-color:#fff;
+            background-color: #fff;
             margin-bottom: 15px;
             display: flex;
             justify-content: center;
-            align-items:center;
+            align-items: center;
         }
-        .monster .mouth{
+
+        .monster .mouth {
             width: 32%;
             height: 12px;
             background-color: #fff;
             border-radius: 10px;
 
         }
-        .monster .eye .eyeBall{
+
+        .monster .eye .eyeBall {
             width: 50%;
             height: 50%;
             border-radius: 50%;
-            background-color: rgb(2,65,120);
+            background-color: rgb(2, 65, 120);
             /* position: relative; */
             animation: eyeMove 1.6s infinite alternate;
         }
+
         .monster.blue .eyeBall,
-        .monster.blue .mouth{
-            background-color: rgb(253,115,84);
+        .monster.blue .mouth {
+            background-color: rgb(253, 115, 84);
         }
-        .monster.blue{
-            background-color: rgb(2,65,120);
+
+        .monster.blue {
+            background-color: rgb(2, 65, 120);
             animation-delay: .5s;
         }
+
         .monster::after,
-        .monster::before{
+        .monster::before {
             content: '';
             width: 18px;
             height: 8px;
@@ -85,38 +98,44 @@
             top: -8px;
             left: 50%;
         }
-        .monster::before{
+
+        .monster::before {
             transform: translateX(-70%) rotate(45deg);
         }
-        .monster::after{
+
+        .monster::after {
             transform: translateX(-30%) rotate(-45deg);
         }
-        @keyframes jumping{
-            
-            50%{
+
+        @keyframes jumping {
+
+            50% {
                 top: 0;
-                box-shadow: 0 10px 20px rgba(0,0,0,.2);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
             }
-           
-            100%{
+
+            100% {
                 top: -50px;
-                box-shadow: 0 120px 20px rgba(0,0,0,.2);
+                box-shadow: 0 120px 20px rgba(0, 0, 0, .2);
             }
         }
-        @keyframes eyeMove{
+
+        @keyframes eyeMove {
+
             0%,
-            10%{
+            10% {
                 /* left: -10px; */
                 transform: translateX(-50%);
             }
+
             90%,
-            100%{
+            100% {
                 /* left: 10px; */
                 transform: translateX(50%);
             }
         }
 
-        .pageLoading{
+        .pageLoading {
             position: fixed;
             display: flex;
             justify-content: center;
@@ -130,7 +149,7 @@
             transition: opacity 0.5s;
         }
 
-        .pageLoading .loading{
+        .pageLoading .loading {
             margin-top: 60px;
             width: 200px;
             height: 8px;
@@ -139,29 +158,35 @@
             position: relative;
             overflow: hidden;
         }
-        .pageLoading .loading .bar{
+
+        .pageLoading .loading .bar {
             position: absolute;
             width: 0%;
             height: 100%;
             background-color: #DB4D6D;
         }
-        .pageLoading .disappear{
+
+        .pageLoading .disappear {
             animation: disappear 1s alternate;
         }
-        .pageLoading.complete{
-            opacity:0;
+
+        .pageLoading.complete {
+            opacity: 0;
             transition: opacity 0.5s;
         }
+
         @keyframes disappear {
-            50%{
+            50% {
                 transform: scale(0.6) rotateZ(180deg);
             }
-            100%{
-                transform: scale(0.2)  rotateX(360deg);
+
+            100% {
+                transform: scale(0.2) rotateX(360deg);
             }
         }
     </style>
 </head>
+
 <body>
     <div class="textBox">
         <h1 class="monseterText">We are<br>SQUARE<br>MONSTER!</h1>
@@ -189,30 +214,30 @@
             <div class="bar"></div>
         </div>
     </div>
-    <script src="../jQuery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        function barMove(){
+        function barMove() {
             var bar = document.querySelector('.bar');
             var pageLoading = document.querySelector('.pageLoading');
             var textBox = document.querySelector('.textBox');
             var timer;
             var per = 0;
 
-            timer = setInterval(function(){
+            timer = setInterval(function () {
                 per += 1;
                 if (per >= 100) {
                     pageLoading.children[0].classList += ' disappear';
                     pageLoading.classList += ' complete';
-                    setTimeout(function(){
+                    setTimeout(function () {
                         textBox.innerHTML += '<h4>Ahhhh We will eat you</h4>';
-                    },3000)
+                    }, 3000)
                     clearInterval(timer);
                 }
                 bar.style.width = per + '%';
             }, 30)
         }
         barMove();
-
     </script>
 </body>
+
 </html>
